@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact</title>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</head>
+<body>
+<div>
+    <form action="" method="post">
+        {{ form.csrf_token() }}
+
+        {% for field in form if field.name != "csrf_token" %}
+	        <p>{{ field.label() }}</p>
+	        <p>{{ field }}
+	            {% for error in field.errors %}
+		            {{ error }}
+                {% endfor %}
+            </p>
+        {% endfor %}
+    </form>
+
+</div>
+</body>
+</html>
